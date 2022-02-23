@@ -1,9 +1,6 @@
 package Arrays;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SumOfElementsToK {
 
@@ -58,7 +55,7 @@ public class SumOfElementsToK {
     public static List<List<Integer>> allSumToK(int[] arr, int sum) {
         if(sum == 0) return new ArrayList<>();
         if(sum < 0) return null;
-        List<List<Integer>> allCombinations = new ArrayList<>();
+        List<List<Integer>> allCombinations = null;
         for(int i=0; i< arr.length; i++) {
             int rem = sum - arr[i];
             List<List<Integer>> list = allSumToK(arr, rem);
@@ -70,7 +67,9 @@ public class SumOfElementsToK {
                 }
                 for(List<Integer> l : list) {
                     l.add(arr[i]);
-                    allCombinations.add(l);
+                    if(allCombinations == null) allCombinations = new ArrayList<>();
+                    Collections.sort(l);
+                    if(!allCombinations.contains(l)) allCombinations.add(l);
                 }
             }
         }
@@ -113,6 +112,7 @@ public class SumOfElementsToK {
 
         System.out.println("----------------------------------");
      //   System.out.println(allSumToK(new int[]{2,4},8));
-        System.out.println(distinctKElementsThatSum(new int[]{1,2,3,4,5,6,2,1},9,3,0));
+       // System.out.println(distinctKElementsThatSum(new int[]{1,2,3,4,5,6,2,1},9,3,0));
+        System.out.println(allSumToK(new int[]{2,3,6,7},7));
     }
 }
